@@ -1,4 +1,6 @@
-﻿namespace LicenciasMedicasGL.Models
+﻿using System.Collections.Generic;
+
+namespace LicenciasMedicasGL.Models
 {
     public class Prestadora
     {
@@ -9,14 +11,10 @@
 
         public string EmailContacto { get; set; }
 
-        List<Medico> Medicos { get; set; }
+        public List<Medico> Medicos { get; set; }
     }
 
-    /*
-
-- TelefonoContacto
-
-- Medicos*/
+ 
 }
 
 

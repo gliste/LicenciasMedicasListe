@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace LicenciasMedicasGL.Models
 {
@@ -11,11 +12,17 @@ namespace LicenciasMedicasGL.Models
 
         public string Email { get; set; }
 
+        public DateTime FechaAlta { get; set; } 
+
         public Direccion Direccion { get; set; }
 
-        List<Licencia> Licencias { get; set; }
+        public ObraSocial ObraSocial { get; set; }
 
-        List<Telefono> Telefonos { get; set; }
+        public bool estaActivo { get; set; }
+
+        public List<Licencia> Licencias { get; set; }
+
+        public List<Telefono> Telefonos { get; set; }
          
 
     }

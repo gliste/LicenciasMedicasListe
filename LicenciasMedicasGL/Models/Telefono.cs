@@ -4,6 +4,6 @@
     {
         public int Numero { get; set; }
 
-        public TipoTelefono TipoTelefono { }
+        public TipoTelefono TipoTelefono { get; set; }
     }
 }

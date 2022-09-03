@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace LicenciasMedicasGL.Models
 {
@@ -6,20 +7,14 @@ namespace LicenciasMedicasGL.Models
     {
         public string Legajo  { get; set; }
                 
-        public bool EmpleadoActivo { get; set; }
+       
 
-        
+       
+
+              
         
     }
 
-    /*
-
-
-
-
-- FechaAlta   consultar DateTime  
- 
-- ObraSocial  consultar Enun
-    */
+    
 
 }
