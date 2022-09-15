@@ -27,9 +27,10 @@ namespace LicenciasMedicasGL.Models
 
         public DateTime FechaFinSolicitada { get; set; }
 
-        public DateTimeOffset FechaInicio { get; set; }
-        
-        public DateTimeOffset FechaFin { get; set; }
+        public DateTime FechaInicio { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime FechaFin { get; set; }
         public bool Activa { get; set; }
 
 
