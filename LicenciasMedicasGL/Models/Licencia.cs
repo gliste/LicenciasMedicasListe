@@ -17,7 +17,7 @@ namespace LicenciasMedicasGL.Models
         [StringLength(500, ErrorMessage = ErrorMsg.MsgMax)]
         public string Descripcion { get; set; }
 
-        public int EmpleadoId { get; set; }
+        //public int EmpleadoId { get; set; }
         public Empleado Empleado { get; set; }
 
         public int VisitaId { get; set; }

@@ -34,8 +34,7 @@ namespace LicenciasMedicasGL.Models
 
         public ObraSocial ObraSocial { get; set; }
 
-        public bool estaActivo { get; set; }
-
+        
         public List<Licencia> Licencias { get; set; }
 
         public int TelefonoId { get; set; }

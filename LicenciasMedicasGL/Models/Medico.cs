@@ -11,7 +11,7 @@ namespace LicenciasMedicasGL.Models
         [StringLength(12, MinimumLength = 1, ErrorMessage = ErrorMsg.MsgRango)]
         public string Matricula { get; set; }
 
-        public int PestadoraId { get; set; }
+       // public int PestadoraId { get; set; } ¿está demás? ¿alcanca con la propiedad relacional MedicoId en Prestadora?
                        
         public Prestadora Prestadora { get; set; }
 

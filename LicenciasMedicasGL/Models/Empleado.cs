@@ -14,7 +14,8 @@ namespace LicenciasMedicasGL.Models
         public string Legajo  { get; set; }
              
        public int LicenciaId { get; set; }
-              
+       
+       public bool estaActivo { get; set; }
         
     }
 
