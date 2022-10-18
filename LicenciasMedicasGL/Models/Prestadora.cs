@@ -12,7 +12,7 @@ namespace LicenciasMedicasGL.Models
         [MaxLength(50, ErrorMessage = ErrorMsg.MsgMax)]
         [MinLength(3, ErrorMessage = ErrorMsg.MsgMin)]
         public string Nombre { get; set; }
-        public Direccion Direccion { get; set; }
+        public string Direccion  { get; set; }
 
         public Telefono TelefonoContacto { get; set; }
 
@@ -20,8 +20,7 @@ namespace LicenciasMedicasGL.Models
         [EmailAddress(ErrorMessage = ErrorMsg.MsgEmail)]
         [Display(Name = "Correo Electronico")]
         public string EmailContacto { get; set; }
-        public int MedicoId { get; set; }
-
+        
         public List<Medico> Medicos { get; set; }
     }
 

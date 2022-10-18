@@ -30,7 +30,7 @@ namespace LicenciasMedicasGL.Models
 
         public DateTime FechaAlta { get; set; } 
 
-        public Direccion Direccion { get; set; }
+        public string  Direccion { get; set; }
 
         public ObraSocial ObraSocial { get; set; }
 
@@ -39,7 +39,8 @@ namespace LicenciasMedicasGL.Models
 
         public int TelefonoId { get; set; }
         public List<Telefono> Telefonos { get; set; }
-         
+        
+        //password
 
     }
 }
