@@ -19,6 +19,14 @@ namespace LicenciasMedicasGL.Controllers
             _context = context;
         }
 
+        public IActionResult Index1()
+        {
+            var prestadoras = _context.Prestadoras.ToList();
+
+            return View(prestadoras);
+        }
+
+
         // GET: Prestadora
         public async Task<IActionResult> Index()
         {
