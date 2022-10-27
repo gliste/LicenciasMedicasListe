@@ -5,10 +5,10 @@ using System.Linq;
 
 namespace LicenciasMedicasGL.Controllers
 {
-    public class PersonaController : Controller
+    public class PersonasController : Controller
     {
         private readonly LicenciasMedicasContext _contexto;
-        public PersonaController(LicenciasMedicasContext contexto)
+        public PersonasController(LicenciasMedicasContext contexto)
         {
            this._contexto = contexto;
         }

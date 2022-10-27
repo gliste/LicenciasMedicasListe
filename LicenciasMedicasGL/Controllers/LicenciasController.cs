@@ -10,22 +10,23 @@ using LicenciasMedicasGL.Models;
 
 namespace LicenciasMedicasGL.Controllers
 {
-    public class TelefonoController : Controller
+    public class LicenciasController : Controller
     {
         private readonly LicenciasMedicasContext _context;
 
-        public TelefonoController(LicenciasMedicasContext context)
+        public LicenciasController(LicenciasMedicasContext context)
         {
             _context = context;
         }
 
-        // GET: Telefono
+        // GET: Licencia
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Telefonos.ToListAsync());
+            var licenciasMedicasContext = _context.Licencias.Include(l => l.Empleado).Include(l => l.Medico);
+            return View(await licenciasMedicasContext.ToListAsync());
         }
 
-        // GET: Telefono/Details/5
+        // GET: Licencia/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +34,50 @@ namespace LicenciasMedicasGL.Controllers
                 return NotFound();
             }
 
-            var telefono = await _context.Telefonos
+            var licencia = await _context.Licencias
+                .Include(l => l.Empleado)
+                .Include(l => l.Medico)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (telefono == null)
+            if (licencia == null)
             {
                 return NotFound();
             }
 
-            return View(telefono);
+            return View(licencia);
         }
 
-        // GET: Telefono/Create
-        public IActionResult Create()
+        // GET: Licencia/Create
+        public IActionResult Create(int? id)
         {
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            ViewData["EmpleadoId"] = id;
+            ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Apellido");
             return View();
         }
 
-        // POST: Telefono/Create
+        // POST: Licencia/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Numero,TipoTelefono")] Telefono telefono)
+        public async Task<IActionResult> Create([Bind("Id,MedicoId,FechaSolicitud,Descripcion,EmpleadoId,VisitaId,FechaInicioSolicitada,FechaFinSolicitada,FechaInicio,FechaFin,Activa")] Licencia licencia)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(telefono);
+                _context.Add(licencia);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(telefono);
+            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "Id", "Apellido", licencia.EmpleadoId);
+            ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Apellido", licencia.MedicoId);
+            return View(licencia);
         }
 
-        // GET: Telefono/Edit/5
+        // GET: Licencia/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +85,24 @@ namespace LicenciasMedicasGL.Controllers
                 return NotFound();
             }
 
-            var telefono = await _context.Telefonos.FindAsync(id);
-            if (telefono == null)
+            var licencia = await _context.Licencias.FindAsync(id);
+            if (licencia == null)
             {
                 return NotFound();
             }
-            return View(telefono);
+            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "Id", "Apellido", licencia.EmpleadoId);
+            ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Apellido", licencia.MedicoId);
+            return View(licencia);
         }
 
-        // POST: Telefono/Edit/5
+        // POST: Licencia/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Numero,TipoTelefono")] Telefono telefono)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,MedicoId,FechaSolicitud,Descripcion,EmpleadoId,VisitaId,FechaInicioSolicitada,FechaFinSolicitada,FechaInicio,FechaFin,Activa")] Licencia licencia)
         {
-            if (id != telefono.Id)
+            if (id != licencia.Id)
             {
                 return NotFound();
             }
@@ -97,12 +111,12 @@ namespace LicenciasMedicasGL.Controllers
             {
                 try
                 {
-                    _context.Update(telefono);
+                    _context.Update(licencia);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TelefonoExists(telefono.Id))
+                    if (!LicenciaExists(licencia.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +127,12 @@ namespace LicenciasMedicasGL.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(telefono);
+            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "Id", "Apellido", licencia.EmpleadoId);
+            ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Apellido", licencia.MedicoId);
+            return View(licencia);
         }
 
-        // GET: Telefono/Delete/5
+        // GET: Licencia/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +140,32 @@ namespace LicenciasMedicasGL.Controllers
                 return NotFound();
             }
 
-            var telefono = await _context.Telefonos
+            var licencia = await _context.Licencias
+                .Include(l => l.Empleado)
+                .Include(l => l.Medico)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (telefono == null)
+            if (licencia == null)
             {
                 return NotFound();
             }
 
-            return View(telefono);
+            return View(licencia);
         }
 
-        // POST: Telefono/Delete/5
+        // POST: Licencia/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var telefono = await _context.Telefonos.FindAsync(id);
-            _context.Telefonos.Remove(telefono);
+            var licencia = await _context.Licencias.FindAsync(id);
+            _context.Licencias.Remove(licencia);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TelefonoExists(int id)
+        private bool LicenciaExists(int id)
         {
-            return _context.Telefonos.Any(e => e.Id == id);
+            return _context.Licencias.Any(e => e.Id == id);
         }
     }
 }

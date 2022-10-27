@@ -10,11 +10,11 @@ using LicenciasMedicasGL.Models;
 
 namespace LicenciasMedicasGL.Controllers
 {
-    public class EmpleadoController : Controller
+    public class EmpleadosController : Controller
     {
         private readonly LicenciasMedicasContext _context;
 
-        public EmpleadoController(LicenciasMedicasContext context)
+        public EmpleadosController(LicenciasMedicasContext context)
         {
             _context = context;
         }

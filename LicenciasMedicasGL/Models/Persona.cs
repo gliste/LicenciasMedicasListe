@@ -11,7 +11,7 @@ namespace LicenciasMedicasGL.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = ErrorMsg.MsgRequerido)]
-        [Range(1000000, 9999999, ErrorMessage = ErrorMsg.MsgRango)]
+        [Range(1000000, 99999999, ErrorMessage = ErrorMsg.MsgRango)]
         public int DNI { get; set; }
 
         [Required(ErrorMessage = ErrorMsg.MsgRequerido)]
@@ -28,15 +28,18 @@ namespace LicenciasMedicasGL.Models
         [Display(Name = "Correo Electronico")]
         public string Email { get; set; }
 
+        [Display(Name = "Fecha Alta")]
         public DateTime FechaAlta { get; set; } 
 
         public string  Direccion { get; set; }
 
+        [Display(Name = "Obra Social")]
         public ObraSocial ObraSocial { get; set; }
 
         
         public List<Licencia> Licencias { get; set; }
 
+        [Display(Name = "Id Telefono")]
         public int TelefonoId { get; set; }
         public List<Telefono> Telefonos { get; set; }
         

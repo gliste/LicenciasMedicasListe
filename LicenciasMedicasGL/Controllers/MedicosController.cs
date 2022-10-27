@@ -10,30 +10,22 @@ using LicenciasMedicasGL.Models;
 
 namespace LicenciasMedicasGL.Controllers
 {
-    public class PrestadoraController : Controller
+    public class MedicosController : Controller
     {
         private readonly LicenciasMedicasContext _context;
 
-        public PrestadoraController(LicenciasMedicasContext context)
+        public MedicosController(LicenciasMedicasContext context)
         {
             _context = context;
         }
 
-        public IActionResult Index1()
-        {
-            var prestadoras = _context.Prestadoras.ToList();
-
-            return View(prestadoras);
-        }
-
-
-        // GET: Prestadora
+        // GET: Medico
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Prestadoras.ToListAsync());
+            return View(await _context.Medicos.ToListAsync());
         }
 
-        // GET: Prestadora/Details/5
+        // GET: Medico/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -41,39 +33,39 @@ namespace LicenciasMedicasGL.Controllers
                 return NotFound();
             }
 
-            var prestadora = await _context.Prestadoras
+            var medico = await _context.Medicos
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (prestadora == null)
+            if (medico == null)
             {
                 return NotFound();
             }
 
-            return View(prestadora);
+            return View(medico);
         }
 
-        // GET: Prestadora/Create
+        // GET: Medico/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Prestadora/Create
+        // POST: Medico/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Direccion,EmailContacto")] Prestadora prestadora)
+        public async Task<IActionResult> Create([Bind("Matricula,PestadoraId,LicenciaId,Id,DNI,Nombre,Apellido,Email,FechaAlta,Direccion,ObraSocial,TelefonoId")] Medico medico)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(prestadora);
+                _context.Add(medico);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(prestadora);
+            return View(medico);
         }
 
-        // GET: Prestadora/Edit/5
+        // GET: Medico/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,22 +73,22 @@ namespace LicenciasMedicasGL.Controllers
                 return NotFound();
             }
 
-            var prestadora = await _context.Prestadoras.FindAsync(id);
-            if (prestadora == null)
+            var medico = await _context.Medicos.FindAsync(id);
+            if (medico == null)
             {
                 return NotFound();
             }
-            return View(prestadora);
+            return View(medico);
         }
 
-        // POST: Prestadora/Edit/5
+        // POST: Medico/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Direccion,EmailContacto")] Prestadora prestadora)
+        public async Task<IActionResult> Edit(int id, [Bind("Matricula,PestadoraId,LicenciaId,Id,DNI,Nombre,Apellido,Email,FechaAlta,Direccion,ObraSocial,TelefonoId")] Medico medico)
         {
-            if (id != prestadora.Id)
+            if (id != medico.Id)
             {
                 return NotFound();
             }
@@ -105,12 +97,12 @@ namespace LicenciasMedicasGL.Controllers
             {
                 try
                 {
-                    _context.Update(prestadora);
+                    _context.Update(medico);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PrestadoraExists(prestadora.Id))
+                    if (!MedicoExists(medico.Id))
                     {
                         return NotFound();
                     }
@@ -121,10 +113,10 @@ namespace LicenciasMedicasGL.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(prestadora);
+            return View(medico);
         }
 
-        // GET: Prestadora/Delete/5
+        // GET: Medico/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -132,30 +124,30 @@ namespace LicenciasMedicasGL.Controllers
                 return NotFound();
             }
 
-            var prestadora = await _context.Prestadoras
+            var medico = await _context.Medicos
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (prestadora == null)
+            if (medico == null)
             {
                 return NotFound();
             }
 
-            return View(prestadora);
+            return View(medico);
         }
 
-        // POST: Prestadora/Delete/5
+        // POST: Medico/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var prestadora = await _context.Prestadoras.FindAsync(id);
-            _context.Prestadoras.Remove(prestadora);
+            var medico = await _context.Medicos.FindAsync(id);
+            _context.Medicos.Remove(medico);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PrestadoraExists(int id)
+        private bool MedicoExists(int id)
         {
-            return _context.Prestadoras.Any(e => e.Id == id);
+            return _context.Medicos.Any(e => e.Id == id);
         }
     }
 }

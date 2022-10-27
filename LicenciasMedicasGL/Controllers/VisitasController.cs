@@ -10,11 +10,11 @@ using LicenciasMedicasGL.Models;
 
 namespace LicenciasMedicasGL.Controllers
 {
-    public class VisitaController : Controller
+    public class VisitasController : Controller
     {
         private readonly LicenciasMedicasContext _context;
 
-        public VisitaController(LicenciasMedicasContext context)
+        public VisitasController(LicenciasMedicasContext context)
         {
             _context = context;
         }
@@ -47,10 +47,14 @@ namespace LicenciasMedicasGL.Controllers
         }
 
         // GET: Visita/Create
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
-            ViewData["LicenciaId"] = new SelectList(_context.Licencias, "Id", "Descripcion");
-            ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Apellido");
+            if (id==null)
+            {
+                return Content("No pase id Correcto");
+            }
+            ViewData["LicenciaId"] = id;
+            ViewBag.MedicoId = new SelectList(_context.Medicos, "Id", "Apellido");
             return View();
         }
 
