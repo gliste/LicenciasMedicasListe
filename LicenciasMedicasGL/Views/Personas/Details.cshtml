@@ -1,34 +1,15 @@
-﻿@model LicenciasMedicasGL.Models.Medico
+﻿@model LicenciasMedicasGL.Models.Persona
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Details";
 }
 
-<h1>Delete</h1>
+<h1>Details</h1>
 
-<h3>¿Estas seguro/a de eliminar al profesional?</h3>
 <div>
-    <h4>Medico</h4>
+    <h4>Persona</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Matricula)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Matricula)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PestadoraId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PestadoraId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LicenciaId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LicenciaId)
-        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.DNI)
         </dt>
@@ -78,10 +59,8 @@
             @Html.DisplayFor(model => model.TelefonoId)
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Volver</a>
-    </form>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
 </div>

@@ -1,4 +1,4 @@
-﻿@model LicenciasMedicasGL.Models.Medico
+﻿@model LicenciasMedicasGL.Models.Persona
 
 @{
     ViewData["Title"] = "Create";
@@ -6,27 +6,12 @@
 
 <h1>Create</h1>
 
-<h4>Medico</h4>
+<h4>Persona</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Matricula" class="control-label"></label>
-                <input asp-for="Matricula" class="form-control" />
-                <span asp-validation-for="Matricula" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PestadoraId" class="control-label"></label>
-                <input asp-for="PestadoraId" class="form-control" />
-                <span asp-validation-for="PestadoraId" class="text-danger"></span>
-            </div>
-            @*<div class="form-group">
-                <label asp-for="LicenciaId" class="control-label"></label>
-                <input asp-for="LicenciaId" class="form-control" />
-                <span asp-validation-for="LicenciaId" class="text-danger"></span>
-            </div>*@
             <div class="form-group">
                 <label asp-for="DNI" class="control-label"></label>
                 <input asp-for="DNI" class="form-control" />
@@ -75,7 +60,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Volver</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
