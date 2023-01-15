@@ -1,7 +1,9 @@
 ﻿using LicenciasMedicasGL.Data;
 using LicenciasMedicasGL.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LicenciasMedicasGL.Controllers
 {
@@ -20,5 +22,8 @@ namespace LicenciasMedicasGL.Controllers
 
             return View(personas);
         }
+
+        
+
     }
 }
