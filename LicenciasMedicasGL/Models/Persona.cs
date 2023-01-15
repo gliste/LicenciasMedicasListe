@@ -33,6 +33,7 @@ namespace LicenciasMedicasGL.Models
 
         public string  Direccion { get; set; }
 
+        [Required(ErrorMessage = ErrorMsg.MsgRequerido)]
         [Display(Name = "Obra Social")]
         public ObraSocial ObraSocial { get; set; }
 
