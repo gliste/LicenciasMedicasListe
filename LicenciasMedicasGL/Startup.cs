@@ -25,9 +25,11 @@ namespace LicenciasMedicasGL
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<LicenciasMedicasContext>(opciones => opciones.UseInMemoryDatabase("MiContexto"));
+            //services.AddDbContext<LicenciasMedicasContext>(opciones => opciones.UseInMemoryDatabase("MiContexto"));
+            services.AddDbContext<LicenciasMedicasContext>(opciones => opciones.UseSqlServer("server=(localdb)\\MSSQLLocalDB; database=LicenciasMedicasContext.cs"));
 
-            services.AddControllersWithViews();
+           services.AddControllersWithViews();
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
