@@ -26,7 +26,7 @@ namespace LicenciasMedicasGL
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddDbContext<LicenciasMedicasContext>(opciones => opciones.UseInMemoryDatabase("MiContexto"));
-            services.AddDbContext<LicenciasMedicasContext>(opciones => opciones.UseSqlServer("server=(localdb)\\MSSQLLocalDB; database=LicenciasMedicasContext.cs"));
+            services.AddDbContext<LicenciasMedicasContext>(opciones => opciones.UseSqlServer("server=(localdb)\\MSSQLLocalDB;database=LicenciasMedicasContext.cs; Trusted_Connection=true")) ;
 
            services.AddControllersWithViews();
            
