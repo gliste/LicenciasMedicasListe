@@ -26,11 +26,13 @@ namespace LicenciasMedicasGL
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddDbContext<LicenciasMedicasContext>(opciones => opciones.UseInMemoryDatabase("MiContexto"));
-            services.AddDbContext<LicenciasMedicasContext>(opciones => opciones.UseSqlServer("server=(localdb)\\MSSQLLocalDB;database=LicenciasMedicasContext.cs; Trusted_Connection=true")) ;
+            services.AddDbContext<LicenciasMedicasContext>(opciones => opciones.UseSqlServer(Configuration.GetConnectionString("LicenciasMedicasDBListe")));
 
            services.AddControllersWithViews();
            
         }
+
+       
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
