@@ -9,8 +9,7 @@ namespace LicenciasMedicasGL.Models
 
     {
         public int Id { get; set; }
-
-        
+               
         public int MedicoId { get; set; }
        
         [Display(Name = "Numero de Medico")]
@@ -25,6 +24,7 @@ namespace LicenciasMedicasGL.Models
 
        
         public int EmpleadoId { get; set; }
+        
         [Display(Name = "Numero de Empleado")]
         public Empleado Empleado { get; set; }
 

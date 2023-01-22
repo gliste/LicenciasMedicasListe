@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace LicenciasMedicasGL.Data.Migracion
+namespace LicenciasMedicasGL.Migracion
 {
-    public partial class primera : Migration
+    public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -179,7 +179,7 @@ namespace LicenciasMedicasGL.Data.Migracion
                 column: "EmpleadoId",
                 principalTable: "Personas",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.NoAction);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Licencias_Personas_MedicoId",
@@ -187,7 +187,7 @@ namespace LicenciasMedicasGL.Data.Migracion
                 column: "MedicoId",
                 principalTable: "Personas",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.NoAction);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Telefonos_Personas_PersonaId",

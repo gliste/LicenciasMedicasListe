@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace LicenciasMedicasGL.Data.Migracion
+namespace LicenciasMedicasGL.Migracion
 {
     [DbContext(typeof(LicenciasMedicasContext))]
     partial class LicenciasMedicasContextModelSnapshot : ModelSnapshot

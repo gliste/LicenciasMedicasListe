@@ -32,8 +32,7 @@ namespace LicenciasMedicasGL.Models
         [Required(ErrorMessage = ErrorMsg.MsgRequerido)]
         [StringLength(200, ErrorMessage = ErrorMsg.MsgMax)]
         public string Nota { get; set; }
-        
-        
+               
         public bool Cargada { get; set; }
 
 
