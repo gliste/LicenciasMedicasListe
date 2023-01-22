@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\20230122014305_Inicial.cs" />
+    <Compile Remove="Data\20230122014305_Inicial.Designer.cs" />
+    <Compile Remove="Data\Migracion\20230122025438_Incial.cs" />
+    <Compile Remove="Data\Migracion\20230122025438_Incial.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.32" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.32" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.32" />
@@ -17,6 +24,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Migracion\" />
   </ItemGroup>
 
 </Project>

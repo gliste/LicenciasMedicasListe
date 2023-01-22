@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace LicenciasMedicasGL.Migrations
+namespace LicenciasMedicasGL.Data.Migracion
 {
-    public partial class Inicial : Migration
+    public partial class primera : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

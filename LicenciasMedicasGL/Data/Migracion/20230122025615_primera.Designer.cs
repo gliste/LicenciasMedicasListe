@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace LicenciasMedicasGL.Migrations
+namespace LicenciasMedicasGL.Data.Migracion
 {
     [DbContext(typeof(LicenciasMedicasContext))]
-    [Migration("20230122003311_Inicial")]
-    partial class Inicial
+    [Migration("20230122025615_primera")]
+    partial class primera
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
