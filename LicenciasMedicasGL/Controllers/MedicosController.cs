@@ -33,8 +33,7 @@ namespace LicenciasMedicasGL.Controllers
                 return NotFound();
             }
 
-            var medico = await _context.Medicos
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var medico = await _context.Medicos.FirstOrDefaultAsync(m => m.Id == id);
             if (medico == null)
             {
                 return NotFound();

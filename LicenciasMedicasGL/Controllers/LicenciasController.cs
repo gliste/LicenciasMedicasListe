@@ -46,7 +46,9 @@ namespace LicenciasMedicasGL.Controllers
             return View(licencia);
         }
 
+
         // GET: Licencia/Create
+        
         public IActionResult Create(int? id)
         {
             if(id == null)
@@ -72,8 +74,8 @@ namespace LicenciasMedicasGL.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "Id", "Apellido", licencia.EmpleadoId);
-            ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Apellido", licencia.MedicoId);
+           // ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "Id", "Apellido", licencia.EmpleadoId);
+           // ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Apellido", licencia.MedicoId);
             return View(licencia);
         }
 
