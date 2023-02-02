@@ -34,9 +34,7 @@ namespace LicenciasMedicasGL.Controllers
                 return NotFound();
             }
 
-            var licencia = await _context.Licencias
-                .Include(l => l.Empleado)
-                .Include(l => l.Medico)
+            var licencia = await _context.Licencias.Include(l => l.Empleado).Include(l => l.Medico)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (licencia == null)
             {
@@ -48,16 +46,16 @@ namespace LicenciasMedicasGL.Controllers
 
 
         // GET: Licencia/Create
-        
+
         public IActionResult Create(int? id)
         {
-            if(id == null)
-            {
-                return NotFound();
-            }
+            //if (id == null)
+            //{
+            ////    return NotFound();
+            //}
 
-            ViewData["EmpleadoId"] = id;
-            ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Apellido");
+            //ViewData["EmpleadoId"] = id;
+            //ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Apellido");
             return View();
         }
 
@@ -74,8 +72,8 @@ namespace LicenciasMedicasGL.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-           // ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "Id", "Apellido", licencia.EmpleadoId);
-           // ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Apellido", licencia.MedicoId);
+            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "Id", "Apellido", licencia.EmpleadoId);
+            ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Apellido", licencia.MedicoId);
             return View(licencia);
         }
 

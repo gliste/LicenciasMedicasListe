@@ -16,7 +16,6 @@ namespace LicenciasMedicasGL
 
         {
             
-
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -26,5 +25,9 @@ namespace LicenciasMedicasGL
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+        
     }
+
+    
 }

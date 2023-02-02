@@ -10,6 +10,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using LicenciasMedicasGL.Models;
+using Microsoft.AspNetCore.Identity;
+
+
+
 
 namespace LicenciasMedicasGL
 {
@@ -27,8 +32,32 @@ namespace LicenciasMedicasGL
         {
             //services.AddDbContext<LicenciasMedicasContext>(opciones => opciones.UseInMemoryDatabase("MiContexto"));
             services.AddDbContext<LicenciasMedicasContext>(opciones => opciones.UseSqlServer(Configuration.GetConnectionString("LicenciasMedicasDBListe")));
+            #region
+            services.AddIdentity<Persona, Rol>().AddEntityFrameworkStores<LicenciasMedicasContext>();
 
-           services.AddControllersWithViews();
+            services.Configure<IdentityOptions>(opciones => {
+                opciones.Password.RequireNonAlphanumeric = false;
+                opciones.Password.RequireLowercase = false;
+                opciones.Password.RequireUppercase = false;
+                opciones.Password.RequireDigit = false;
+                opciones.Password.RequiredLength = 5;
+
+
+             }  );
+
+            //Password por defecto en precarga = Password1!
+
+            //Configuraciones por defecto para Password:
+            /*  opciones.Password.RequireNonAlphanumeric = true;
+                opciones.Password.RequireLowercase = true;
+                opciones.Password.RequireUppercase = true;
+                opciones.Password.RequireDigit = true;
+                opciones.Password.RequiredLength = 6;
+            */
+
+
+            #endregion
+            services.AddControllersWithViews();
            
         }
 
@@ -52,6 +81,7 @@ namespace LicenciasMedicasGL
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

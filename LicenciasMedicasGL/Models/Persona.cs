@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using LicenciasMedicasGL.Helpers;
+using Microsoft.AspNetCore.Identity;
 
 namespace LicenciasMedicasGL.Models
 {
-    public class Persona
+    public class Persona : IdentityUser<int>
     {
 
-        public int Id { get; set; }
+        //public int Id { get; set; }
 
         [Required(ErrorMessage = ErrorMsg.MsgRequerido)]
         [Range(1000000, 99999999, ErrorMessage = ErrorMsg.MsgRango)]
@@ -26,12 +27,16 @@ namespace LicenciasMedicasGL.Models
         [Required(ErrorMessage = ErrorMsg.MsgRequerido)]
         [EmailAddress(ErrorMessage = ErrorMsg.MsgEmail)]
         [Display(Name = "Correo Electronico")]
-        public string Email { get; set; }
+        public override string Email
+        {
+            get { return base.Email; }
+            set { base.Email = value; }
+        }
 
         [Display(Name = "Fecha Alta")]
-        public DateTime FechaAlta { get; set; } 
+        public DateTime FechaAlta { get; set; }
 
-        public string  Direccion { get; set; }
+        public string Direccion { get; set; }
 
         [Required(ErrorMessage = ErrorMsg.MsgRequerido)]
         [Display(Name = "Obra Social")]

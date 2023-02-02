@@ -1,9 +1,11 @@
 ﻿using LicenciasMedicasGL.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace LicenciasMedicasGL.Data
 {
-    public class LicenciasMedicasContext : DbContext
+    public class LicenciasMedicasContext : IdentityDbContext<IdentityUser<int>,IdentityRole<int>, int>
     {
         public LicenciasMedicasContext(DbContextOptions options) : base(options)
         {
@@ -23,7 +25,7 @@ namespace LicenciasMedicasGL.Data
 
         public DbSet<Visita> Visitas { get; set; }
 
-
+        public DbSet<Rol> Roles { get; set; }
 
     }
 }
