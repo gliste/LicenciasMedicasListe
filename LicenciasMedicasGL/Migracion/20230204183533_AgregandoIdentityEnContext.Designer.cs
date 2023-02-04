@@ -4,14 +4,16 @@ using LicenciasMedicasGL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LicenciasMedicasGL.Migracion
 {
     [DbContext(typeof(LicenciasMedicasContext))]
-    partial class LicenciasMedicasContextModelSnapshot : ModelSnapshot
+    [Migration("20230204183533_AgregandoIdentityEnContext")]
+    partial class AgregandoIdentityEnContext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
