@@ -7,6 +7,7 @@
         public const string MsgMin = "{0} debe ser mayor a {1} caracteres";
         public const string MsgRango = "El {0} debe estar comprendido entre {2} y {1} caracteres ";
         public const string MsgEmail = "Por favor ingresa un {0}";
+        public const string PassIncorrecta = "La contraseña no coincide";
 
     }
 }

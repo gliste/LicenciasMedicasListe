@@ -15,7 +15,8 @@ namespace LicenciasMedicasGL.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            #region establecer nombres para los Entity Stores
+            
+            #region establecer nombres para los Identity Stores
 
             builder.Entity<IdentityUser<int>>().ToTable("Personas");
             builder.Entity<IdentityRole<int>>().ToTable("Roles");
