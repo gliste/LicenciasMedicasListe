@@ -85,9 +85,9 @@ namespace LicenciasMedicasGL.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Legajo,LicenciaId,estaActivo,Id,DNI,Nombre,Apellido,Email,FechaAlta,Direccion,ObraSocial,TelefonoId")] Empleado empleado)
+        public async Task<IActionResult> Edit(int id, [Bind("Legajo,LicenciaId,estaActivo,Id,DNI,Nombre,Apellido,Email,FechaAlta,Direccion,ObraSocial,TelefonoId")] Empleado empleadoDelFormulario)
         {
-            if (id != empleado.Id)
+            if (id != empleadoDelFormulario.Id)
             {
                 return NotFound();
             }
@@ -96,12 +96,36 @@ namespace LicenciasMedicasGL.Controllers
             {
                 try
                 {
-                    _context.Update(empleado);
-                    await _context.SaveChangesAsync();
+                    Empleado empleadoEnDb = _context.Empleados.Find(empleadoDelFormulario.Id);
+                    if (empleadoEnDb == null)
+                    {
+                        return NotFound();
+                    }
+
+                    empleadoEnDb.DNI = empleadoDelFormulario.DNI;
+                    empleadoEnDb.Legajo = empleadoDelFormulario.Legajo;
+                    empleadoEnDb.LicenciaId = empleadoDelFormulario.LicenciaId;
+                    empleadoEnDb.estaActivo = empleadoDelFormulario.estaActivo;
+                    empleadoEnDb.Nombre = empleadoDelFormulario.Nombre;
+                    empleadoEnDb.Apellido = empleadoDelFormulario.Apellido;
+                    empleadoEnDb.FechaAlta = empleadoDelFormulario.FechaAlta;
+                    empleadoEnDb.Direccion = empleadoDelFormulario.Direccion;
+                    empleadoEnDb.ObraSocial = empleadoDelFormulario.ObraSocial;
+                    empleadoEnDb.TelefonoId = empleadoDelFormulario.TelefonoId;
+
+                    if (!ActualizarEmail(empleadoDelFormulario, empleadoEnDb))
+                    {
+                        ModelState.AddModelError("Email", "El mail esta actualizado.");
+                        return View(empleadoDelFormulario);
+
+                    }
+
+                    //_context.Update(empleadoDelFormulario);
+                    //await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EmpleadoExists(empleado.Id))
+                    if (!EmpleadoExists(empleadoDelFormulario.Id))
                     {
                         return NotFound();
                     }
@@ -112,7 +136,48 @@ namespace LicenciasMedicasGL.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(empleado);
+            return View(empleadoDelFormulario);
+        }
+
+        private bool ActualizarEmail(Empleado empleadoForm, Empleado empleadoDb)
+        {
+            bool resultado = true;
+            try
+            {
+                if (!empleadoDb.NormalizedEmail.Equals(empleadoForm.Email.ToUpper()))
+                {
+                    //si son iguales - tengo que procesar 
+                    //verifico si ya existe el mail
+                    if (ExisteEmail(empleadoForm.Email))
+                    {
+                        //si existe no puede ser actualizado 
+                        resultado = false;
+                    }
+                    else
+                    {
+                        //como existe puedo actualizar
+                        empleadoDb.Email = empleadoForm.Email;
+                        empleadoDb.NormalizedEmail = empleadoForm.Email.ToUpper();
+                        empleadoDb.UserName = empleadoForm.Email;
+                        empleadoDb.NormalizedUserName = empleadoForm.NormalizedEmail;
+                    }
+                }
+                else
+                {
+                    //son iguales, no se actualiza. Ya lo está
+                }
+            }
+            catch 
+            {
+
+                resultado = false; 
+            }
+            return resultado;
+        }
+
+        private bool ExisteEmail(string email)
+        {
+            return _context.Personas.Any(p=>p.NormalizedEmail == email.ToUpper());
         }
 
         // GET: Empleado/Delete/5
