@@ -22,7 +22,7 @@ namespace LicenciasMedicasGL.Controllers
         }
 
         [HttpPost]  
-        public async Task<IActionResult>  Registrar([Bind("Email, Password, ConfirmacionPassword")] RegistroUsuario registroUsuarioVM)
+        public async Task<IActionResult> Registrar([Bind("Email, Password, ConfirmacionPassword")] RegistroUsuario registroUsuarioVM)
         {
             if (ModelState.IsValid)
             {
@@ -50,6 +50,37 @@ namespace LicenciasMedicasGL.Controllers
             return View(registroUsuarioVM);
         }
 
+        public IActionResult IniciarSesion()
+        {
+            return View(); 
+        }
+        [HttpPost]
+        public async Task<IActionResult> IniciarSesion(Login loginVM)
+        {
+            if (ModelState.IsValid)
+            {
+                var resultado = await _signinmanager.PasswordSignInAsync(loginVM.Email, loginVM.Password, loginVM.Recordarme, false);
 
+                if (resultado.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+
+                }
+
+                ModelState.AddModelError(string.Empty, "Inicio de Sesion inválido.");
+
+                
+            }
+            return View(loginVM);
+        }
+
+        public async Task<IActionResult> CerrarSesion()
+        {
+            await _signinmanager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+
+      
     }
 }
