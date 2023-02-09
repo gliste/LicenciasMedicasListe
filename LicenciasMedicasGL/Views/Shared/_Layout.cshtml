@@ -23,6 +23,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        @if (singInManager.IsSignedIn(User))
+                        {
+                            //aca debemos mostrar lo que necesita un usuario con sesion 
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Personas" asp-action="Index">Personas</a>
                         </li>
@@ -44,15 +47,24 @@
                         <li class="nav-item">
                            <a class="nav-link text-dark" asp-area="" asp-controller="Visitas" asp-action="Index">Visitas</a>
                         </li>
-                        <li class="nav-item">
-                           <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Registrar">Registrate</a>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="IniciarSesion">Iniciar Sesión</a>
-                        </li>
+                       
                         <li class="nav-item">
                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="CerrarSesion">Cerrar Sesión</a>
                         </li>
+
+                        }
+                        else
+                        {
+                            //acá un usuario sin sesión 
+                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Registrar">Registrate</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="IniciarSesion">Iniciar Sesión</a>
+                        </li>
+                        }
+
+                        
                     </ul>
                 </div>
             </div>
