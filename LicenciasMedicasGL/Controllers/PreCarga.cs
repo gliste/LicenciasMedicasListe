@@ -1,4 +1,5 @@
 ﻿using LicenciasMedicasGL.Data;
+using LicenciasMedicasGL.Helpers;
 using LicenciasMedicasGL.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,7 @@ namespace LicenciasMedicasGL.Controllers
         private readonly RoleManager<Rol> _roleManager;
         private readonly LicenciasMedicasContext _context;
 
-        private List<string> roles = new List<string>() { "Admin", "Empleado", "Medico", "RRHH" };
+        private List<string> roles = new List<string>() { Configs.AdminRolName, Configs.EmpleadoRolName, Configs.MedicoRolName, Configs.RRHHRolName};
         public PreCarga(UserManager<Persona> userManager, RoleManager<Rol> roleManager,LicenciasMedicasContext context)
         {
             _userManager = userManager;

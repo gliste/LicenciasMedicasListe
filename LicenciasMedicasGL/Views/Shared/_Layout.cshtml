@@ -25,7 +25,7 @@
                         </li>
                         @if (singInManager.IsSignedIn(User))
                         {
-                            //aca debemos mostrar lo que necesita un usuario con sesion 
+                            //aca debemos mostrar lo que necesita un usuario con sesion iniciada
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Personas" asp-action="Index">Personas</a>
                         </li>
@@ -51,6 +51,12 @@
                         <li class="nav-item">
                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="CerrarSesion">Cerrar Sesión</a>
                         </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class = "nav-item">
+                                <a class = "nav-link text-dark" asp-area ="" asp-controller = "Account" asp-action= "ListarRoles">Listar Roles</a>
+                            </li>
+                        }
 
                         }
                         else

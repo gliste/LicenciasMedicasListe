@@ -1,4 +1,5 @@
-﻿using LicenciasMedicasGL.Models;
+﻿using LicenciasMedicasGL.Helpers;
+using LicenciasMedicasGL.Models;
 using LicenciasMedicasGL.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -34,10 +35,22 @@ namespace LicenciasMedicasGL.Controllers
                 };
 
                 var resultadoCreate = await _usermanager.CreateAsync(empleadoACrear, registroUsuarioVM.Password);
+
                 if (resultadoCreate.Succeeded)
                 {
-                    await _signinmanager.SignInAsync(empleadoACrear, isPersistent: false);
-                    return RedirectToAction("Edit", "Empleados", new {id = empleadoACrear.Id});
+                    var resultadoAddRole = await _usermanager.AddToRoleAsync(empleadoACrear,Configs.EmpleadoRolName);
+
+                    if (resultadoAddRole.Succeeded)
+                    {
+                        await _signinmanager.SignInAsync(empleadoACrear, isPersistent: false);
+                        return RedirectToAction("Edit", "Empleados", new { id = empleadoACrear.Id });
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, $"No se puedo agregar el rol de {Configs.EmpleadoRolName}");
+                    }
+
+                    
                 }
 
                 foreach(var error in resultadoCreate.Errors)
