@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LicenciasMedicasGL.Data;
 using LicenciasMedicasGL.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LicenciasMedicasGL.Controllers
 {
+   
     public class VisitasController : Controller
     {
         private readonly LicenciasMedicasContext _context;
