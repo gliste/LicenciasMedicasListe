@@ -1,6 +1,7 @@
 ﻿using LicenciasMedicasGL.Helpers;
 using LicenciasMedicasGL.Models;
 using LicenciasMedicasGL.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
@@ -97,13 +98,13 @@ namespace LicenciasMedicasGL.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ListarRoles()
+        {
+            var roles = _rolmanager.Roles.ToList();
 
-        //public async Task<IActionResult> ListarRoles()
-        //{
-        //    var roles = _rolmanager.Roles.ToList();
-
-        //    return View(roles);
-        //}
+            return View(roles);
+        }
 
 
     }

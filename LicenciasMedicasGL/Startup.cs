@@ -12,9 +12,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using LicenciasMedicasGL.Models;
 using Microsoft.AspNetCore.Identity;
-
-
-
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace LicenciasMedicasGL
 {
@@ -32,6 +30,17 @@ namespace LicenciasMedicasGL
         {
             //services.AddDbContext<LicenciasMedicasContext>(opciones => opciones.UseInMemoryDatabase("MiContexto"));
             services.AddDbContext<LicenciasMedicasContext>(opciones => opciones.UseSqlServer(Configuration.GetConnectionString("LicenciasMedicasDBListe")));
+
+            #region
+            services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme, opciones =>
+            {
+                opciones.LoginPath = "/Account/Iniciarsesion";
+                opciones.AccessDeniedPath = "/Account/AccesoDenegado";
+                opciones.Cookie.Name = "IdentidadLicenciasApp";
+
+            });
+            #endregion
+
             #region
             services.AddIdentity<Persona, Rol>().AddEntityFrameworkStores<LicenciasMedicasContext>();
 
