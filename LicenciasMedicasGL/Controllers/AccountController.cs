@@ -3,6 +3,8 @@ using LicenciasMedicasGL.Models;
 using LicenciasMedicasGL.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LicenciasMedicasGL.Controllers
@@ -11,10 +13,12 @@ namespace LicenciasMedicasGL.Controllers
     {
         private readonly UserManager<Persona> _usermanager;
         private readonly SignInManager<Persona> _signinmanager;
-        public AccountController(UserManager<Persona> usermanager, SignInManager<Persona> signInManager)
+        private readonly RoleManager<Rol> _rolmanager;
+        public AccountController(UserManager<Persona> usermanager, SignInManager<Persona> signInManager, RoleManager<Rol> roleManager)
         {
             this._usermanager = usermanager;
             this._signinmanager = signInManager;
+            this._rolmanager = roleManager;
         }
 
         public IActionResult Registrar()
@@ -94,6 +98,13 @@ namespace LicenciasMedicasGL.Controllers
         }
 
 
-      
+        //public async Task<IActionResult> ListarRoles()
+        //{
+        //    var roles = _rolmanager.Roles.ToList();
+
+        //    return View(roles);
+        //}
+
+
     }
 }
