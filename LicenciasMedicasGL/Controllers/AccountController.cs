@@ -72,9 +72,10 @@ namespace LicenciasMedicasGL.Controllers
         [AllowAnonymous]
         public IActionResult IniciarSesion(string returnUrl)
         {
-            ViewBag.Url1 = returnUrl;
-            ViewData["Url2"] = returnUrl;
-            TempData["Url3"] = returnUrl;
+            //ViewBag.Url1 = returnUrl;
+            //ViewData["Url2"] = returnUrl;
+            //TempData["Url3"] = returnUrl;
+            TempData["ReturnUrl"] = returnUrl;
 
             return View(); 
         }
@@ -83,12 +84,27 @@ namespace LicenciasMedicasGL.Controllers
         [HttpPost]
         public async Task<IActionResult> IniciarSesion(Login loginVM)
         {
+
+            //var url1 = ViewBag.Url1;
+            //var url2 = ViewData["Url2"];
+            //var url3 = TempData["Url3"];
+
+            //var ReturnUrl = TempData["ReturnUrl"];
+            string returnUrl = TempData["ReturnUrl"] as string;
+
             if (ModelState.IsValid)
             {
                 var resultado = await _signinmanager.PasswordSignInAsync(loginVM.Email, loginVM.Password, loginVM.Recordarme, false);
 
                 if (resultado.Succeeded)
                 {
+
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+
+
                     return RedirectToAction("Index", "Home");
 
                 }
