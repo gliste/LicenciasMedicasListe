@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
 
 namespace LicenciasMedicasGL.Controllers
-{   
+{
     [Authorize]
     public class EmpleadosController : Controller
     {
@@ -45,7 +45,7 @@ namespace LicenciasMedicasGL.Controllers
             return View(empleado);
         }
 
-        // GET: Empleado/Create
+        //[Authorize(Roles = "Admin , RRHH")]
         public IActionResult Create()
         {
             return View();
@@ -54,6 +54,8 @@ namespace LicenciasMedicasGL.Controllers
         // POST: Empleado/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        //[Authorize(Roles = "Admin , RRHH")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Legajo,LicenciaId,estaActivo,Id,DNI,Nombre,Apellido,Email,FechaAlta,Direccion,ObraSocial,TelefonoId")] Empleado empleado)

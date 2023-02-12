@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LicenciasMedicasGL.Data;
 using LicenciasMedicasGL.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LicenciasMedicasGL.Controllers
 {
@@ -42,7 +43,7 @@ namespace LicenciasMedicasGL.Controllers
             return View(medico);
         }
 
-        // GET: Medico/Create
+       //[Authorize(Roles = "RRHH") ]
         public IActionResult Create()
         {
             return View();
@@ -51,6 +52,7 @@ namespace LicenciasMedicasGL.Controllers
         // POST: Medico/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[Authorize(Roles = "RRHH")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Matricula,PestadoraId,LicenciaId,Id,DNI,Nombre,Apellido,Email,FechaAlta,Direccion,ObraSocial,TelefonoId")] Medico medico)

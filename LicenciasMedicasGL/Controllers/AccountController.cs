@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace LicenciasMedicasGL.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<Persona> _usermanager;
@@ -21,12 +22,12 @@ namespace LicenciasMedicasGL.Controllers
             this._signinmanager = signInManager;
             this._rolmanager = roleManager;
         }
-
+        [AllowAnonymous]
         public IActionResult Registrar()
         {
             return View();
         }
-
+        [AllowAnonymous]
         [HttpPost]  
         public async Task<IActionResult> Registrar([Bind("Email, Password, ConfirmacionPassword")] RegistroUsuario registroUsuarioVM)
         {
@@ -68,10 +69,17 @@ namespace LicenciasMedicasGL.Controllers
             return View(registroUsuarioVM);
         }
 
-        public IActionResult IniciarSesion()
+        [AllowAnonymous]
+        public IActionResult IniciarSesion(string returnUrl)
         {
+            ViewBag.Url1 = returnUrl;
+            ViewData["Url2"] = returnUrl;
+            TempData["Url3"] = returnUrl;
+
             return View(); 
         }
+
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> IniciarSesion(Login loginVM)
         {
