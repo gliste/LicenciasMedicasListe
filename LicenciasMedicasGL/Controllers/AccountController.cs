@@ -1,11 +1,14 @@
-﻿using LicenciasMedicasGL.Helpers;
+﻿using LicenciasMedicasGL.Data;
+using LicenciasMedicasGL.Helpers;
 using LicenciasMedicasGL.Models;
 using LicenciasMedicasGL.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Data;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace LicenciasMedicasGL.Controllers
@@ -16,11 +19,17 @@ namespace LicenciasMedicasGL.Controllers
         private readonly UserManager<Persona> _usermanager;
         private readonly SignInManager<Persona> _signinmanager;
         private readonly RoleManager<Rol> _rolmanager;
-        public AccountController(UserManager<Persona> usermanager, SignInManager<Persona> signInManager, RoleManager<Rol> roleManager)
+        private readonly LicenciasMedicasContext _contexto;
+
+        public AccountController(UserManager<Persona> usermanager,
+            SignInManager<Persona> signInManager,
+            RoleManager<Rol> roleManager,LicenciasMedicasContext contexto )
         {
             this._usermanager = usermanager;
             this._signinmanager = signInManager;
             this._rolmanager = roleManager;
+            this._contexto = contexto;
+
         }
         [AllowAnonymous]
         public IActionResult Registrar()
@@ -136,6 +145,25 @@ namespace LicenciasMedicasGL.Controllers
             return View();
         }
 
+        
 
+        public IActionResult TestCurrentUser()
+        {
+            if (_signinmanager.IsSignedIn(User))
+            {
+                string nombreUsuario = User.Identity.Name;
+
+                Persona persona = _contexto.Personas.FirstOrDefault(p => p.NormalizedUserName == nombreUsuario.ToUpper());
+
+                int personaId = Int32.Parse(_usermanager.GetUserId(User));
+
+                int personaId2 = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+                var personaId3 = User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/5/identity/claims/nameidentifier");
+            }
+
+            
+            return null; 
+        }
     }
 }
