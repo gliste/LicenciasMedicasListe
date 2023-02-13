@@ -73,8 +73,9 @@ namespace LicenciasMedicasGL
        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, LicenciasMedicasContext contexto)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -85,6 +86,17 @@ namespace LicenciasMedicasGL
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            contexto.Database.Migrate();
+
+            #region
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            //{
+            //    var contexto = serviceScope.ServiceProvider.GetService<LicenciasMedicasContex>();
+
+            //    contexto.Database.Migrate();
+            //}
+            #endregion
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
