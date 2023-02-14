@@ -53,7 +53,7 @@ namespace LicenciasMedicasGL.Controllers
         {
             if (id==null)
             {
-                return Content("No pase id Correcto");
+                return View();
             }
             ViewData["LicenciaId"] = id;
             ViewBag.MedicoId = new SelectList(_context.Medicos, "Id", "Apellido");
