@@ -46,6 +46,7 @@ namespace LicenciasMedicasGL.Controllers
        //[Authorize(Roles = "RRHH") ]
         public IActionResult Create()
         {
+            ViewData["Context"] = _context;
             return View();
         }
 
@@ -63,6 +64,8 @@ namespace LicenciasMedicasGL.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewData["Context"] = _context;
             return View(medico);
         }
 

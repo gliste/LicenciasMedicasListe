@@ -15,8 +15,15 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Medico" class="control-label"></label>
-                @*<input asp-for="MedicoId" class="form-control"/>*@
-                <select asp-for="Medico" class ="form-control" asp-items="ViewBag.MedicoId"></select>
+               @* <input asp-for="MedicoId" class="form-control"/>*@
+                <select name = "MedicoId" class ="form-control">
+                    @foreach (Medico medico in ((LicenciasMedicasGL.Data.LicenciasMedicasContext)ViewData["Context"]).Medicos.ToList())
+                    {
+                        <option name = "MedicoId" value ="@medico.Id" >@medico.Nombre </option>
+                    }
+
+                </select>
+          
                
             </div>
             <div class="form-group">
@@ -31,7 +38,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="EmpleadoId" class="control-label"></label>
-                <input asp-for="EmpleadoId" class="form-control" value="@ViewBag.EmpleadoId" readonly/>                
+                <input asp-for="EmpleadoId" class="form-control" value="@ViewBag.EmpleadoId"/>                
             </div>
             <div class="form-group">
                 <label asp-for="VisitaId" class="control-label"></label>

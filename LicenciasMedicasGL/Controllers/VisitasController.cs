@@ -51,12 +51,13 @@ namespace LicenciasMedicasGL.Controllers
         // GET: Visita/Create
         public IActionResult Create(int? id)
         {
-            if (id==null)
-            {
-                return View();
-            }
-            ViewData["LicenciaId"] = id;
-            ViewBag.MedicoId = new SelectList(_context.Medicos, "Id", "Apellido");
+            //if (id==null)
+            //{
+            //    return View();
+            //}
+            //ViewData["LicenciaId"] = id;
+            //ViewBag.MedicoId = new SelectList(_context.Medicos, "Id", "Apellido");
+            ViewData["Context"] = _context;
             return View();
         }
 
@@ -75,6 +76,7 @@ namespace LicenciasMedicasGL.Controllers
             }
             ViewData["LicenciaId"] = new SelectList(_context.Licencias, "Id", "Descripcion", visita.LicenciaId);
             ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Apellido", visita.MedicoId);
+            ViewData["Context"] = _context;
             return View(visita);
         }
 
